@@ -13,18 +13,18 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    bat 'docker build -t javatechie/devops-integration .'
+                    bat 'docker build -t jaidev5/devops-integration .'
                 }
             }
         }
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   bat 'docker login -u javatechie -p ${dockerhubpwd}'
+                   withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                   bat 'docker login -u jaidev5 -p ${dockerhubpwd}'
 
 }
-                   bat 'docker push javatechie/devops-integration'
+                   bat 'docker push jaidev5/devops-integration'
                 }
             }
         }
