@@ -6,7 +6,7 @@ pipeline {
     stages{
         stage('Build Maven'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Java-Techie-jt/devops-automation']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Jprakash57/devops-automation']]])
                 bat 'mvn clean install'
             }
         }
@@ -20,7 +20,7 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                   withCredentials([string(credentialsId: 'dockerhub-pat', variable: 'dockerhubpwd')]) {
                    bat 'docker login -u jaidev5 -p ${dockerhubpwd}'
 
 }
