@@ -21,19 +21,19 @@ pipeline {
             steps{
                 script{
                    withCredentials([string(credentialsId: 'dockerhub-pat', variable: 'dockerhubpwd')]) {
-                   bat 'docker login -u jaidev5 -p ${dockerhubpwd}'
+                   bat 'docker login -u jaidev5 -p %dockerhubpwd%'
 
 }
                    bat 'docker push jaidev5/devops-integration'
                 }
             }
         }
-        stage('Deploy to k8s'){
-            steps{
-                script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
-                }
-            }
-        }
+        // stage('Deploy to k8s'){
+        //     steps{
+        //         script{
+        //             kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+        //         }
+        //     }
+        // }
     }
 }
